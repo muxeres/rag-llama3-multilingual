@@ -146,6 +146,7 @@ async def ingest_file(file: UploadFile = File(...)):
     
     try:
         # Save uploaded file to temporary location
+        tmp_path = None
         with tempfile.NamedTemporaryFile(delete=False, suffix=file_ext) as tmp_file:
             content = await file.read()
             tmp_file.write(content)
@@ -171,7 +172,7 @@ async def ingest_file(file: UploadFile = File(...)):
     except Exception as e:
         logger.error(f"Error ingesting file: {e}")
         # Clean up on error
-        if tmp_path.exists():
+        if tmp_path is not None and tmp_path.exists():
             tmp_path.unlink()
         raise HTTPException(status_code=500, detail=str(e))
 

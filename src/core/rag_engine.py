@@ -32,7 +32,6 @@ class RAGEngine:
         self.document_processor = DocumentProcessor()
         self.vector_store = create_vector_store(vector_store_type)
         self.llm = create_llm(llm_backend)
-        self.prompts = PromptTemplates()
         
         logger.info(f"RAG engine initialized (backend: {llm_backend}, language: {self.language})")
     
@@ -145,7 +144,7 @@ class RAGEngine:
         
         if not context:
             # No context found
-            answer = self.prompts.get_no_context_response(language)
+            answer = PromptTemplates.get_no_context_response(language)
             return {
                 "answer": answer,
                 "sources": [],
@@ -154,8 +153,8 @@ class RAGEngine:
             }
         
         # Format prompt
-        system_prompt = self.prompts.get_system_prompt(language)
-        user_prompt = self.prompts.format_prompt(question, context, language)
+        system_prompt = PromptTemplates.get_system_prompt(language)
+        user_prompt = PromptTemplates.format_prompt(question, context, language)
         
         # Generate answer
         answer = self.llm.generate(user_prompt, system_prompt)
