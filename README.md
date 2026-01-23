@@ -17,6 +17,7 @@ A production-ready multilingual (EN/ES/PT) RAG (Retrieval-Augmented Generation) 
   - CLI tool for scripting
 - **🐳 Docker Support**: Complete Docker Compose setup
 - **✅ Production Ready**: Logging, error handling, and comprehensive tests
+- **🔒 Security**: All dependencies patched against known vulnerabilities
 
 ## 🏗️ Architecture
 
@@ -215,6 +216,32 @@ pytest --cov=src --cov-report=html
 # Run specific test file
 pytest tests/test_document_processor.py -v
 ```
+
+## 🔒 Security
+
+This project takes security seriously. All dependencies are regularly updated to patch known vulnerabilities.
+
+### Recent Security Updates
+
+All dependencies have been updated to their latest secure versions:
+
+- **FastAPI**: 0.115.0+ (fixes ReDoS vulnerability)
+- **LangChain**: 0.3.27+ (fixes XXE, SSRF, pickle deserialization)
+- **Transformers**: 4.48.0+ (fixes deserialization vulnerabilities)
+- **PyTorch**: 2.6.0+ (fixes buffer overflow, use-after-free, RCE)
+- **python-multipart**: 0.0.18+ (fixes DoS and ReDoS)
+
+### Security Best Practices
+
+- Environment variables for sensitive data (never commit `.env`)
+- Input validation using Pydantic models
+- File type validation for uploads
+- Proper error handling to prevent information disclosure
+- Regular dependency updates
+
+### Reporting Security Issues
+
+If you discover a security vulnerability, please email the maintainers directly rather than opening a public issue.
 
 ## 🌐 Multilingual Prompts
 
