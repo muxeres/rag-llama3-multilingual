@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import List, Dict
 import pypdf
 import markdown
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from src.config import settings
 from src.logger import logger
 
